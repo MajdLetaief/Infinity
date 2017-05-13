@@ -50,3 +50,15 @@ def LoginView(request):
     return render(request, 'app/login.html', {})
 def VolumeView(request):
     return render(request, 'app/volume.html', {})
+
+def GetNetwork(request):
+    urlNetwork = "http://192.168.114.130:9696/v2.0/networks"
+    s = request.session['X-Token']
+    l = {'X-Auth-Token': s}
+    i = requests.get(urlNetwork, headers=l)
+    ListNetworks = i.json()
+    status = ListNetworks["networks"]
+
+    print(i.json())
+    return render(request, 'app/networks.html', {"status": status})
+
