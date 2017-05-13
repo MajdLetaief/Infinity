@@ -1,0 +1,54 @@
+{% extends 'app/index.html' %}
+{% block content %}
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <div class="row">
+            <ol class="breadcrumb">
+                <li><a href="#">
+                    <svg class="glyph stroked home">
+                        <use xlink:href="#stroked-home"></use>
+                    </svg>
+                </a></li>
+                <li class="active">Icons</li>
+            </ol>
+        </div><!--/.row-->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Glance</h1>
+            </div>
+        </div><!--/.row-->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Creating Image</div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <form role="form" method="POST" action="{% url 'addimage' %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Container_format</label>
+                                    <input class="form-control" placeholder="container_format" name="container_format">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>disk_format</label>
+                                    <input class="form-control" placeholder="disk_format" class="form-control"
+                                           name="disk_format">
+                                </div>
+                                <div class="form-group">
+                                    <label>Image name</label>
+                                    <input class="form-control" placeholder="name" name="name">
+                                </div>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add</button>
+                                <button type="reset" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Reset</button>
+                                <a href="{% url 'images' %}" class="btn btn-primary"><span class="glyphicon glyphicon-book"></span>Go To List</a>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- /.col-->
+            </div><!-- /.row -->
+        </div>
+    </div><!--/.main-->
+{% endblock content %}

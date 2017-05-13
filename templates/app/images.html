@@ -59,34 +59,47 @@
                                             <div class="th-inner sortable">Disk Format</div>
                                             <div class="fht-cell"></div>
                                         </th>
+                                        <th colspan="4">
+                                            <div class="th-inner sortable">Delete</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
 
                                     </tr>
                                     </thead>
-                                    <tbody>
 
-                                    <tr class="no-records-found">
+                                    <tbody>
+                                    {% for i in images %}
+                                        <tr class="no-records-found">
+                                                <td colspan="4">
+                                                <div class="th-inner sortable">{{ i.name }}</div>
+                                                <div class="fht-cell"></div>
+                                            </td>
+                                            <td colspan="4">
+                                                <div class="th-inner sortable">{{ i.id }}</div>
+                                                <div class="fht-cell"></div>
+                                            </td>
+                                            <td colspan="4">
+                                                <div class="th-inner sortable">{{ i.container_format }}</div>
+                                                <div class="fht-cell"></div>
+                                            </td>
+                                            <td colspan="4">
+                                                <div class="th-inner sortable">{{ i.status }}</div>
+                                                <div class="fht-cell"></div>
+                                            </td>
+                                            <td colspan="4">
+                                                <div class="th-inner sortable">{{ i.disk_format }}</div>
+                                                <div class="fht-cell"></div>
+                                            </td >
                                         <td colspan="4">
-                                            <div class="th-inner sortable">{{ name }}</div>
-                                            <div class="fht-cell"></div>
-                                        </td>
-                                        <td colspan="4">
-                                            <div class="th-inner sortable">{{ id }}</div>
-                                            <div class="fht-cell"></div>
-                                        </td>
-                                        <td colspan="4">
-                                            <div class="th-inner sortable">{{ container_format }}</div>
-                                            <div class="fht-cell"></div>
-                                        </td>
-                                        <td colspan="4">
-                                            <div class="th-inner sortable">{{ status }}</div>
-                                            <div class="fht-cell"></div>
-                                        </td>
-                                        <td colspan="4">
-                                            <div class="th-inner sortable">{{ disk }}</div>
-                                            <div class="fht-cell"></div>
-                                        </td>
-                                    </tr>
+                                        <form role="form" method="POST" action="{% url 'addimage' %}">
+                                            {% csrf_token %}
+                                            <button type="submit" value ="{{ i.id  }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+                                        </form>
+                                        </td >
+                                        </tr>
+                                    {% endfor %}
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>

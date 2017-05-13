@@ -1,6 +1,6 @@
 {% extends 'app/index.html' %}
 {% block content %}
-            {% load staticfiles %}
+    {% load staticfiles %}
 
     <div class="row">
         <ol class="breadcrumb">
@@ -21,59 +21,63 @@
             <h1 class="page-header">Volume</h1>
         </div>
     </div><!--/.row-->
-		    <div class="row">
-			    <div class="col-lg-12">
-				    <div class="panel panel-default">
-                        <div class="panel-heading">Advanced Table</div>
-                        <div class="panel-body">
-                                <div class="bootstrap-table">
-                                    <div class="fixed-table-container">
-                                        <div class="fixed-table-header">
-                                            <table></table>
-                                        </div>
-                                        <div class="fixed-table-body">
-                                            <div class="fixed-table-loading" style="top: 37px; display: none;">
-                                                Loading, please wait…
-                                            </div>
-                                            <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="">
-                                                            <div class="th-inner sortable">Item ID</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="">
-                                                            <div class="th-inner sortable">Item Name<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span></div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th style="">
-                                                            <div class="th-inner sortable">Item Price</div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="no-records-found">
-                                                        {% for v in vname %}
-                                <td colspan="4">
-                                     {{ v.name }}
-                                {{ v.availability_zone }}
-                                {{ v.volume_type }}
-                                </tr>
-                                {% endfor %}
-                                                       </td>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Advanced Table</div>
+                <div class="panel-body">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+                            <div class="fixed-table-header">
+                                <table></table>
+                            </div>
+                            <div class="fixed-table-body">
+                                <div class="fixed-table-loading" style="top: 37px; display: none;">
+                                    Loading, please wait…
                                 </div>
+                                <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true"
+                                       data-show-toggle="true" data-show-columns="true" data-search="true"
+                                       data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                                       data-sort-order="desc" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th style="">
+                                            <div class="th-inner sortable">Item ID</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">Item Name<span class="order"><span
+                                                    class="caret" style="margin: 10px 5px;"></span></span></div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th style="">
+                                            <div class="th-inner sortable">Item Price</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="no-records-found">
+                                        {% for v in vname %}
+                                            <td colspan="4">
+                                                {{ v.name }}
+                                                {{ v.availability_zone }}
+                                                {{ v.volume_type }}
+                                            </tr>
+                                        {% endfor %}
+                                    </td>
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </div>
-            </div><!--/.row-->
-        {% endblock content %}
+            </div>
+        </div>
+    </div>
+    </div><!--/.row-->
+{% endblock content %}
 
 
 

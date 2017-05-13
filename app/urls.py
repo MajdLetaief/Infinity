@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^volume/', views.VolumeView, name='volume'),
     url(r'^addvolume/', views.AddVolumeView, name='addvolume'),
     url(r'^images/', views.ImageView, name='images'),
+    url(r'^addimage/', views.addImageView, name='addimage'),
 
     ]

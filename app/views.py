@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
-
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 import json
 import requests
 # Create your views here.
@@ -93,15 +94,34 @@ def ImageView(request):
     l = {'X-Auth-Token': s}
     i = requests.get(urlImage, headers=l)
     ListImages = i.json()
-    status=ListImages["images"][0]["status"]
-    name = ListImages["images"][0]["name"]
-    format = ListImages["images"][0]["disk_format"]
-    id = ListImages["images"][0]["id"]
-    container_format = ListImages["images"][0]["container_format"]
+    images = ListImages['images']
 
-    return render(request, 'app/images.html', {"status": status,
-                                               "name":name,
-                                               "disk":format,
-                                               "id":id,
-                                               "container_format":container_format})
+    if request.POST:
+        token = request.session['X-Token']
+        url = "http://192.168.114.130:9292/v2/images/" + i.Id
+        headers = {'X-Auth-Token': token, 'content-type': 'application/json'}
+        requests.post(url, headers=headers)
+        return render(request, 'app/images.html')
 
+    return render(request, 'app/images.html', {"images":images})
+
+
+def addImageView(request):
+    token = request.session['X-Token']
+    url = "http://192.168.114.130:9292/v2/images"
+    if request.POST:
+        container_format = request.POST['container_format']
+        disk_format = request.POST['disk_format']
+        name = request.POST['name']
+        data = {
+
+                "container_format": container_format,
+                "disk_format": disk_format,
+                "name": name,
+        }
+        headers = {'X-Auth-Token': token, 'content-type': 'application/json'}
+        requests.post(url, data=json.dumps(data), headers=headers)
+
+
+
+    return render(request, 'app/addimages.html', {})
