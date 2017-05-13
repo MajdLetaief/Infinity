@@ -21,6 +21,7 @@
             <h1 class="page-header">Volume</h1>
         </div>
     </div><!--/.row-->
+
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -34,6 +35,62 @@
                             <div class="fixed-table-body">
                                 <div class="fixed-table-loading" style="top: 37px; display: none;">
                                     Loading, please wait…
+
+		    <div class="row">
+			    <div class="col-lg-12">
+				    <div class="panel panel-default">
+                        <div class="panel-heading">Advanced Table</div>
+                        <div class="panel-body">
+                                <div class="bootstrap-table">
+                                    <div class="fixed-table-container">
+                                        <div class="fixed-table-header">
+                                            <table></table>
+                                        </div>
+                                        <div class="fixed-table-body">
+                                            <div class="fixed-table-loading" style="top: 37px; display: none;">
+                                                Loading, please wait…
+                                            </div>
+                                            <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="4">
+                                                            <div class="th-inner sortable">Item ID</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th colspan="4">
+                                                            <div class="th-inner sortable">Item Name<span class="order"><span class="caret" style="margin: 10px 5px;"></span></span></div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th colspan="4">
+                                                            <div class="th-inner sortable">Item Price</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr class="no-records-found">
+                                                        {% for v in vname %}
+                                                            <td colspan="4">
+                                                                <div class="th-inner sortable">{{ v.name }}</div>
+                                                                <div class="fht-cell"></div>
+                                                            </td>
+                                                            <td colspan="4">
+                                                                <div class="th-inner sortable">{{ v.availability_zone}}</div>
+                                                                <div class="fht-cell"></div>
+                                                            </td>
+                                                            <td colspan="4">
+                                                                <div class="th-inner sortable">{{ v.volume_type  }}</div>
+                                                                <div class="fht-cell"></div>
+                                                            </td>
+                                                        {% endfor %}
+                                                     </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                                 <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true"
                                        data-show-toggle="true" data-show-columns="true" data-search="true"
