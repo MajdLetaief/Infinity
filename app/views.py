@@ -48,8 +48,8 @@ def LoginView(request):
 
         # return render()
     return render(request, 'app/login.html', {})
-def VolumeView(request):
-    return render(request, 'app/volume.html', {})
+
+
 
 def GetNetwork(request):
     urlNetwork = "http://192.168.114.130:9696/v2.0/networks"
@@ -61,4 +61,61 @@ def GetNetwork(request):
 
     print(i.json())
     return render(request, 'app/networks.html', {"status": status})
+
+def VolumeView(request):
+    token =  request.session['X-Token']
+    projectid = request.session['X-Project']
+    url = "http://192.168.114.130:8776/v3/"+projectid+"/volumes/detail"
+    l={'X-Auth-Token':token}
+    r = requests.get(url,headers=l)
+    x=r.json()
+    vname = x['volumes']
+
+    return render(request, 'app/volume.html', {'vname':vname})
+
+def AddVolumeView(request):
+
+    token = request.session['X-Token']
+    projectid = request.session['X-Project']
+    url = "http://192.168.114.130:8776/v3/" + projectid + "/volumes"
+    if request.POST:
+        vname = request.POST['vname']
+        vsize = request.POST['vsize']
+        vdesc = request.POST['vdesc']
+        f = "false"
+        data = {
+        "volume": {
+            "size":vsize,
+            "availability_zone": "nova",
+            "description": vdesc,
+            "multiattach ": f,
+            "name": vname,
+            "volume_type": "lvmdriver-1",
+            "metadata": {},
+        }
+    }
+        headers = {'X-Auth-Token':token,'content-type': 'application/json'}
+        r = requests.post(url, data=json.dumps(data), headers=headers)
+    return render(request, 'app/addvolume.html', {})
+
+
+
+def ImageView(request):
+    urlImage = "http://192.168.114.130:9292/v2/images"
+    s = request.session['X-Token']
+    l = {'X-Auth-Token': s}
+    i = requests.get(urlImage, headers=l)
+    ListImages = i.json()
+    status=ListImages["images"][0]["status"]
+    name = ListImages["images"][0]["name"]
+    format = ListImages["images"][0]["disk_format"]
+    id = ListImages["images"][0]["id"]
+    container_format = ListImages["images"][0]["container_format"]
+
+    return render(request, 'app/images.html', {"status": status,
+                                               "name":name,
+                                               "disk":format,
+                                               "id":id,
+                                               "container_format":container_format})
+
 
