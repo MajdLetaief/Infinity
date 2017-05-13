@@ -48,8 +48,21 @@ def LoginView(request):
 
         # return render()
     return render(request, 'app/login.html', {})
-def VolumeView(request):
 
+
+
+def GetNetwork(request):
+    urlNetwork = "http://192.168.114.130:9696/v2.0/networks"
+    s = request.session['X-Token']
+    l = {'X-Auth-Token': s}
+    i = requests.get(urlNetwork, headers=l)
+    ListNetworks = i.json()
+    status = ListNetworks["networks"]
+
+    print(i.json())
+    return render(request, 'app/networks.html', {"status": status})
+
+def VolumeView(request):
     token =  request.session['X-Token']
     projectid = request.session['X-Project']
     url = "http://192.168.114.130:8776/v3/"+projectid+"/volumes/detail"
@@ -144,6 +157,25 @@ def FlavorView(request,flavorId):
 
 def AddFlavorView(request):
     return render(request, 'app/flavorForm.html' , {})
+
+def AddNetworkView(request):
+
+    token = request.session['X-Token']
+    projectid = request.session['X-Project']
+    url = "http://192.168.114.130:9696/v2.0/networks"
+    if request.POST:
+        nname = request.POST['nname']
+        f = "true"
+        data = {
+    "network": {
+        "name": nname,
+        "admin_state_up": f
+
+    }
+}
+        headers = {'X-Auth-Token':token,'content-type': 'application/json'}
+        r = requests.post(url, data=json.dumps(data), headers=headers)
+    return render(request, 'app/addNetwork.html', {})
 
 def FipView(request):
     s = request.session['X-Token']
