@@ -144,3 +144,12 @@ def FlavorView(request,flavorId):
 
 def AddFlavorView(request):
     return render(request, 'app/flavorForm.html' , {})
+
+def FipView(request):
+    s = request.session['X-Token']
+    l = {'X-Auth-Token': s}
+    urlfip = "http://192.168.114.130:9696/v2.0/floatingips"
+    i = requests.get(urlfip, headers=l)
+    Listfip = i.json()
+    fips=Listfip['floatingips']
+    return render(request, 'app/fip.html', {'fips':fips})

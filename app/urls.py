@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^flavors/', views.FlavorsView, name='flavors'),
     url(r'^flavor/([0-9]+)/$', views.FlavorView, name='flavor'),
     url(r'^addflavor',views.AddFlavorView, name="addflavor"),
+    url(r'^fip/', views.FipView, name='fip'),
     ]
