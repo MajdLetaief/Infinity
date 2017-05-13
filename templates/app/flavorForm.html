@@ -1,0 +1,69 @@
+{% extends 'app/index.html' %} {% block content %} {% load staticfiles %}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <svg class="glyph stroked home">
+                    <use xlink:href="#stroked-home"></use>
+                </svg>
+            </a>
+        </li>
+        <li class="active">Project/Flavors</li>
+    </ol>
+</div>
+<!--/.row-->
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Flavor</h1>
+    </div>
+</div>
+<!--/.row-->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Flavor Details </div>
+            <div class="panel-body">
+                <div class="bootstrap-table">
+                    <div class="fixed-table-container">
+                        <div class="fixed-table-header">
+                            <table></table>
+                        </div>
+                        <div class="fixed-table-body">
+                            <div class="fixed-table-loading" style="top: 37px; display: none;">
+                                Loading, please wait…
+                            </div>
+                            <form role="form" method="post" action="{% url 'flavors' %}">
+                                <div class="panel-body">
+                                    <form role="form" method="post" action="{% url 'index' %}">
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Name" name="name" type="text" autofocus="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Ram" name="ram" type="number" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Vcpus" name="vcpus" type="number" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="form-control" placeholder="Disk" name="disk" type="number" value="">
+                                            </div>
+                                            <input type="submit" value="Create Flavor" class="btn btn-primary pull-right" />
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--/.row-->
+{% endblock content %}

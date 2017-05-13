@@ -105,3 +105,42 @@ def ImageView(request):
                                                "id":id,
                                                "container_format":container_format})
 
+def FlavorsView(request):
+    if request.POST:
+        urlAddingFlavor = "http://192.168.114.130:8774/v2.1/flavors"
+        token = request.session['X-Token']
+        newHeader = {'X-Auth-Token':token,'content-type': 'application/json'}
+        name = request.POST['name']
+        ram = request.POST['ram']
+        vcpus = request.POST['vcpus']
+        disk = request.POST['disk']
+        newFlavor = {
+            "flavor":{
+                "name":name,
+                "ram":ram,
+                "vcpus":vcpus,
+                "disk":disk,
+            }
+        }
+        addingFlavorResponse = requests.post(urlAddingFlavor, data=json.dumps(newFlavor), headers=newHeader)
+        print(addingFlavorResponse.status_code)
+        print(addingFlavorResponse.text)
+    urlFlavors = "http://192.168.114.130:8774/v2.1/flavors"
+    token = request.session['X-Token']
+    newHeader = {'X-Auth-Token' : token}
+    flavorsListResponse = requests.get(urlFlavors, headers=newHeader)
+    flavorsListJson = flavorsListResponse.json()
+    flavors = flavorsListJson['flavors']
+    return render(request, 'app/flavors.html', {'flavors':flavors})
+
+def FlavorView(request,flavorId):
+    urlFlavor = "http://192.168.114.130:8774/v2.1/flavors/"+flavorId
+    token = request.session['X-Token']
+    newHeader = {'X-Auth-Token':token}
+    oneFlavorResponse = requests.get(urlFlavor, headers = newHeader)
+    oneFlavorJson = oneFlavorResponse.json()
+    flavor = oneFlavorJson['flavor']
+    return render(request, 'app/flavor.html', {'flavor':flavor})
+
+def AddFlavorView(request):
+    return render(request, 'app/flavorForm.html' , {})
