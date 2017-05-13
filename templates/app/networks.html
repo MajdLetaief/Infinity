@@ -36,30 +36,33 @@
                                             <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc" class="table table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th style="">
+                                                        <th style="" colspan="4">
                                                             <div class="th-inner sortable">Name</div>
                                                             <div class="fht-cell"></div>
                                                         </th>
-                                                        <th style="">
+                                                        <th style="" colspan="4">
                                                             <div class="th-inner sortable">Status</div>
                                                             <div class="fht-cell"></div>
                                                         </th>
-                                                        <th style="">
-                                                            <div class="th-inner sortable">Router</div>
+                                                        <th style="" colspan="4">
+                                                            <div class="th-inner sortable">Date de Creation</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th style="" colspan="4">
+                                                            <div class="th-inner sortable">availability zones</div>
                                                             <div class="fht-cell"></div>
                                                         </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                {% for network in status %}
                                                     <tr class="no-records-found">
-                                                        <td colspan="4">{{ name }}</td>
+                                                        <td colspan="4">{{ network.name }}</td>
+                                                        <td colspan="4">{{ network.status }}</td>
+                                                        <td colspan="4">{{ network.created_at }}</td>
+                                                        <td colspan="4">{{ network.availability_zones }}</td>
                                                     </tr>
-                                                    <tr class="no-records-found">
-                                                        <td colspan="4">{{ status }}</td>
-                                                    </tr>
-                                                    <tr class="no-records-found">
-                                                        <td colspan="4">{{ router }}</td>
-                                                    </tr>
+                                                 {% endfor %}
                                                 </tbody>
                                             </table>
                                         </div>

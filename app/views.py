@@ -119,3 +119,21 @@ def ImageView(request):
                                                "container_format":container_format})
 
 
+def AddNetworkView(request):
+
+    token = request.session['X-Token']
+    projectid = request.session['X-Project']
+    url = "http://192.168.114.130:9696/v2.0/networks"
+    if request.POST:
+        nname = request.POST['nname']
+        f = "true"
+        data = {
+    "network": {
+        "name": nname,
+        "admin_state_up": f
+
+    }
+}
+        headers = {'X-Auth-Token':token,'content-type': 'application/json'}
+        r = requests.post(url, data=json.dumps(data), headers=headers)
+    return render(request, 'app/addNetwork.html', {})
