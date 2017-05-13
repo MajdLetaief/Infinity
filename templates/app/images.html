@@ -1,0 +1,99 @@
+{% extends 'app/index.html' %}
+{% block content %}
+    {% load staticfiles %}
+    <div class="row">
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <svg class="glyph stroked home">
+                        <use xlink:href="#stroked-home"></use>
+                    </svg>
+                </a>
+            </li>
+            <li class="active">Project/Images</li>
+        </ol>
+    </div><!--/.row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Images</h1>
+        </div>
+    </div><!--/.row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Images List</div>
+                <div class="panel-body">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+                            <div class="fixed-table-header">
+                                <table></table>
+                            </div>
+                            <div class="fixed-table-body">
+                                <div class="fixed-table-loading" style="top: 37px; display: none;">
+                                    Loading, please wait…
+                                </div>
+                                <table data-toggle="table" data-url="tables/data1.json" data-show-refresh="true"
+                                       data-show-toggle="true" data-show-columns="true" data-search="true"
+                                       data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name"
+                                       data-sort-order="desc" class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="4">
+                                            <div class="th-inner sortable">Name</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th colspan="4">
+                                            <div class="th-inner sortable">ID</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th colspan="4">
+                                            <div class="th-inner sortable">Container_format</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th colspan="4">
+                                            <div class="th-inner sortable">Status</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th colspan="4">
+                                            <div class="th-inner sortable">Disk Format</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr class="no-records-found">
+                                        <td colspan="4">
+                                            <div class="th-inner sortable">{{ name }}</div>
+                                            <div class="fht-cell"></div>
+                                        </td>
+                                        <td colspan="4">
+                                            <div class="th-inner sortable">{{ id }}</div>
+                                            <div class="fht-cell"></div>
+                                        </td>
+                                        <td colspan="4">
+                                            <div class="th-inner sortable">{{ container_format }}</div>
+                                            <div class="fht-cell"></div>
+                                        </td>
+                                        <td colspan="4">
+                                            <div class="th-inner sortable">{{ status }}</div>
+                                            <div class="fht-cell"></div>
+                                        </td>
+                                        <td colspan="4">
+                                            <div class="th-inner sortable">{{ disk }}</div>
+                                            <div class="fht-cell"></div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div><!--/.row-->
+{% endblock content %}
