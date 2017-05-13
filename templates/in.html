@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}in{% endblock %}
+
+{% block content %}
+
+                        <td><label for="id_username">Username : <h1>{{username}}</h1></label></td>
+
+                    </tr>
+                    <tr>
+                        <td><label for="id_password">Password :{{ password }} </label></td>
+
+                    </tr>
+                </table>
+                {% if form.errors %}
+                    <p class=" label label-danger">
+                        Your username and password didn't match.
+                        Please try again.
+                    </p>
+                {% endif %}
+
+
+
+{% endblock content %}
