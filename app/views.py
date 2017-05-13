@@ -50,3 +50,21 @@ def LoginView(request):
     return render(request, 'app/login.html', {})
 def VolumeView(request):
     return render(request, 'app/volume.html', {})
+
+def ImageView(request):
+    urlImage = "http://192.168.114.130:9292/v2/images"
+    s = request.session['X-Token']
+    l = {'X-Auth-Token': s}
+    i = requests.get(urlImage, headers=l)
+    ListImages = i.json()
+    status=ListImages["images"][0]["status"]
+    name = ListImages["images"][0]["name"]
+    format = ListImages["images"][0]["disk_format"]
+    id = ListImages["images"][0]["id"]
+    container_format = ListImages["images"][0]["container_format"]
+
+    return render(request, 'app/images.html', {"status": status,
+                                               "name":name,
+                                               "disk":format,
+                                               "id":id,
+                                               "container_format":container_format})
