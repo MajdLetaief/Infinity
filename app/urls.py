@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^addvolume/', views.AddVolumeView, name='addvolume'),
     url(r'^addnetwork/', views.AddNetworkView, name='addnetwork'),
     url(r'^images/', views.ImageView, name='images'),
+    url(r'^fip/', views.FipView, name='fip'),
 
     ]

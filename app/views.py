@@ -119,6 +119,7 @@ def ImageView(request):
                                                "container_format":container_format})
 
 
+
 def AddNetworkView(request):
 
     token = request.session['X-Token']
@@ -137,3 +138,13 @@ def AddNetworkView(request):
         headers = {'X-Auth-Token':token,'content-type': 'application/json'}
         r = requests.post(url, data=json.dumps(data), headers=headers)
     return render(request, 'app/addNetwork.html', {})
+
+def FipView(request):
+    s = request.session['X-Token']
+    l = {'X-Auth-Token': s}
+    urlfip = "http://192.168.114.130:9696/v2.0/floatingips"
+    i = requests.get(urlfip, headers=l)
+    Listfip = i.json()
+    fips=Listfip['floatingips']
+    return render(request, 'app/fip.html', {'fips':fips})
+
