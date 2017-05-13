@@ -39,7 +39,7 @@
                         <svg class="glyph stroked male-user">
                             <use xlink:href="#stroked-male-user"></use>
                         </svg>
-                        User <span class="caret"></span></a>
+                        {{ username }} <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">
                             <svg class="glyph stroked male-user">
@@ -98,7 +98,7 @@
                                 xlink:href="#stroked-chevron-down"></use></svg></span> Volumes
                     </a>
                     <ul class="children collapse" id="sub-item-12">
-                        <li><a href="icons.html">Volumes</a></li>
+                        <li><a href="/volume/">Volumes</a></li>
                         <li><a href="icons.html">Backups</a></li>
                         <li><a href="icons.html">Snapshots</a></li>
                     </ul>
@@ -148,6 +148,7 @@
             <h1 class="page-header">Dashboard</h1>
         </div>
     </div><!--/.row-->
+ {% block content %}
 
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-3">
@@ -506,6 +507,7 @@
 
         </div><!--/.col-->
     </div><!--/.row-->
+      {% endblock %}
 </div>    <!--/.main-->
 
 <script src="{% static "app/js/jquery-1.11.1.min.js" %}"></script>

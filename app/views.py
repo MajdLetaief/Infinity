@@ -32,15 +32,21 @@ def AuthView(request):
         headers = {'content-type': 'application/json'}
         r = requests.post(url, data=json.dumps(data), headers=headers)
         assert r.status_code == 201
-        request.session['X-Token']= r.headers.get('X-Subject-Token')
-        print(r.headers.get('X-Subject-Token'))
-        print(r.text)
+        x = r.json()
+        request.session['X-Token'] = r.headers.get('X-Subject-Token')
+        request.session['X-Project'] = x['token']['project']['id']
+
+        prname = x['token']['project']['name']
 
 
-    return render(request, 'app/index.html', {})
+
+
+    return render(request, 'app/index.html', {"username":username})
 
 
 def LoginView(request):
 
         # return render()
     return render(request, 'app/login.html', {})
+def VolumeView(request):
+    return render(request, 'app/volume.html', {})
