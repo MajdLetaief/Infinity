@@ -109,15 +109,26 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">Advanced Table</div>
+                    <a href="/volume/add/">+CreateVolume</a>
 					<div class="panel-body">
 						<table class="">
 						    <thead>
 						    <tr>
-						        <th data-field="state" data-checkbox="true" >Item ID</th>
-						        <th data-field="id" data-sortable="true">Item ID</th>
-						        <th data-field="name"  data-sortable="true">Item Name</th>
-						        <th data-field="price" data-sortable="true">Item Price</th>
+						        <th  >Item ID</th>
+						        <th >Item ID</th>
+						        <th >Item Name</th>
+						        <th >Item Price</th>
 						    </tr>
+                            {% for v in vname %}
+                                <tr>
+                                     {{ v.name }}
+                                {{ v.availability_zone }}
+                                {{ v.volume_type }}
+                                </tr>
+                                {% endfor %}
+
+
+
 						    </thead>
 						</table>
 					</div>

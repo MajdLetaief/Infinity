@@ -49,4 +49,43 @@ def LoginView(request):
         # return render()
     return render(request, 'app/login.html', {})
 def VolumeView(request):
-    return render(request, 'app/volume.html', {})
+    token =  request.session['X-Token']
+    projectid = request.session['X-Project']
+    url = "http://192.168.114.130:8776/v3/"+projectid+"/volumes/detail"
+    l={'X-Auth-Token':token}
+    r = requests.get(url,headers=l)
+    x=r.json()
+    vname = x['volumes']
+
+    return render(request, 'app/volume.html', {'vname':vname})
+
+def AddVolumeView(request):
+    vname = request.POST['vname']
+    vsize = request.POST['vsize']
+    vdesc = request.POST['vdesc']
+    token = request.session['X-Token']
+    projectid = request.session['X-Project']
+    url = "http://192.168.114.130:8776/v3/" + projectid + "/volumes"
+    if request.POST:
+        vname = request.POST['vname']
+        vsize = request.POST['vsize']
+        vdesc = request.POST['vdesc']
+        data = {
+        "volume": {
+            "size":vsize,
+            "availability_zone": "nova",
+            "source_volid": "null",
+            "description": vdesc,
+            "multiattach ": "false",
+            "snapshot_id": "null",
+            "name": vname,
+            "imageRef": "null",
+            "volume_type": "lvmdriver-1",
+            "metadata": {},
+            "source_replica": "null",
+            "consistencygroup_id":"null"
+        }
+    }
+        headers = {'X-Auth-Token':token,'content-type': 'application/json'}
+        r = requests.post(url, data=json.dumps(data), headers=headers)
+    return render(request, 'app/addvolume.html', {})
